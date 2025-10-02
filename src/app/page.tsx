@@ -8,18 +8,17 @@ import { Chart } from "@/components/Dashboard/Chart";
 import { Filters, FilterState } from "@/components/Dashboard/Filters";
 import { VirtualizedTable } from "@/components/DataTable/VirtualizedTable";
 import { TableRow, AnalyticsData } from "@/lib/mockData";
-import { BarChart3, CheckCircle, AlertCircle, Menu, X } from "lucide-react";
+import { BarChart3, CheckCircle, AlertCircle, Menu, X, Loader2 } from "lucide-react";
 
 export default function DashboardPage() {
-  const { user, logout } = useAuth();
+  const { user, loading: userLoading, logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!userLoading && !user) {
       router.push("/login");
     }
-  }, [user, router]);
-  if (!user) return null;
+  }, [userLoading, user, router]);
 
   
   const [filters, setFilters] = useState<FilterState>({
@@ -51,7 +50,6 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Fetch analytics data
   useEffect(() => {
     const fetchAnalytics = async () => {
       setLoading(true);
@@ -194,7 +192,16 @@ export default function DashboardPage() {
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 5000);
   };
-
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+  //       <div className="flex flex-col items-center gap-3">
+  //         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+  //         <p className="text-gray-700 font-medium">Loading your dashboard...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   if (error && !analyticsData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
@@ -237,7 +244,6 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Header */}
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
@@ -257,7 +263,7 @@ export default function DashboardPage() {
             {/* Logout Button */}
             {user && (
               <button
-                className="ml-4 px-4 py-2 rounded-lg bg-red-500 text-white font-semibold shadow hover:bg-red-600 transition-colors"
+                className="ml-4 px-4 py-2 rounded-lg bg-red-500 text-white font-semibold shadow hover:bg-red-800 transition-colors"
                 onClick={async () => {
                   await logout();
                   router.push("/login");

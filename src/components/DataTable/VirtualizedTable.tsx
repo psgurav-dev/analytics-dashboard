@@ -137,7 +137,7 @@ export function VirtualizedTable({
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100/50 overflow-hidden">
+    <div className="bg-white/80 backdrop-blur-lg rounded-2xl  border border-gray-100/50 overflow-hidden">
       <AnimatePresence>
         {drawerOpen && selectedUser && (
           <>
@@ -172,7 +172,6 @@ export function VirtualizedTable({
         )}
       </AnimatePresence>
 
-      {/* Table Header & Bulk Actions */}
       <div className="bg-gradient-to-r from-gray-50 to-white p-3 sm:p-4 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
         <div>
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">Data Table</h2>
