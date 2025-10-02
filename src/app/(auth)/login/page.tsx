@@ -37,7 +37,7 @@ export default function Login() {
       router.push("/");
     } else {
       console.log(errMsg)
-      setError("Something went wrong. Please try again.");
+      setError("Login failed. Please check your credentials.");
     }
     setLoading(false);
   };

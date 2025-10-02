@@ -7,7 +7,7 @@ git clone https://github.com/psgurav-dev/analytics-dashboard
 A production-quality analytics dashboard built with Next.js, React, and TypeScript. Demonstrates metrics visibility, performance (virtualized table), data correctness, optimistic updates, accessibility, and robust testing.
 
 ## 🚀 Live Demo
-Deployed at: [your-live-url]
+Deployed at: [https://analytics-dashboard-nu-seven.vercel.app/]
 
 ## 📹 Loom Walkthrough
 [Loom Video](your-loom-link)
