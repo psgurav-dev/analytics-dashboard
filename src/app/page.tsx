@@ -192,16 +192,16 @@ export default function DashboardPage() {
     setNotification({ type, message });
     setTimeout(() => setNotification(null), 5000);
   };
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-  //       <div className="flex flex-col items-center gap-3">
-  //         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-  //         <p className="text-gray-700 font-medium">Loading your dashboard...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+          <p className="text-gray-700 font-medium">Loading your dashboard...</p>
+        </div>
+      </div>
+    );
+  }
   if (error && !analyticsData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-8">
@@ -265,8 +265,8 @@ export default function DashboardPage() {
               <button
                 className="ml-4 px-4 py-2 rounded-lg bg-red-500 text-white font-semibold shadow hover:bg-red-800 transition-colors"
                 onClick={async () => {
-                  await logout();
                   router.push("/login");
+                  await logout();
                 }}
                 aria-label="Logout"
               >
